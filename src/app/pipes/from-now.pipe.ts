@@ -15,11 +15,12 @@ import { Post } from '../models/post';
 
 @Pipe({name: 'FromNow'})
 export class FromNowPipe implements PipeTransform{
-    dateFromNow:string;
-
+    dateFromNow:String;
+    postDate: Date;
     transform(value:number) {
-        this.dateFromNow = moment(value).fromNow();
-
+        this.postDate = new Date(value);
+        this.dateFromNow = moment(this.postDate).fromNow();
+        // this.dateFromNow = new Date(value);
         return this.dateFromNow;
     }
 }
