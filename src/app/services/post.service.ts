@@ -8,13 +8,14 @@ import { Post } from "../models/post";
 
 @Injectable()
 export class PostService {
+    date:Date = new Date();
 
     constructor(
         private _http: Http,
         @Inject(BackendUri) private _backendUri: any) { }
 
     getPosts(): Observable<Post[]> {
-
+        console.log(this.date.valueOf());
         /*----------------------------------------------------------------------------------------------|
          | ~~~ Pink Path ~~~                                                                            |
          |----------------------------------------------------------------------------------------------|
@@ -31,7 +32,7 @@ export class PostService {
          |----------------------------------------------------------------------------------------------*/
 
         return this._http
-                   .get(`${this._backendUri}/posts`)
+                   .get(`${this._backendUri}/posts?publicationDate_lte=${this.date.valueOf()}&_sort=publicationDate&_order=DESC`)
                    .map((response: Response) => Post.fromJsonToList(response.json()));
     }
 
