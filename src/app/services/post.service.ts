@@ -12,10 +12,9 @@ export class PostService {
 
     constructor(
         private _http: Http,
-        @Inject(BackendUri) private _backendUri: any) { }
+        @Inject(BackendUri) private _direcciones: any) { }
 
     getPosts(): Observable<Post[]> {
-        console.log(this.date.valueOf());
         /*----------------------------------------------------------------------------------------------|
          | ~~~ Pink Path ~~~                                                                            |
          |----------------------------------------------------------------------------------------------|
@@ -32,7 +31,7 @@ export class PostService {
          |----------------------------------------------------------------------------------------------*/
 
         return this._http
-                   .get(`${this._backendUri}/posts?publicationDate_lte=${this.date.valueOf()}&_sort=publicationDate&_order=DESC`)
+                   .get(`${this._direcciones.server}/posts?publicationDate_lte=${this.date.valueOf()}&_sort=publicationDate&_order=DESC`)
                    .map((response: Response) => Post.fromJsonToList(response.json()));
     }
 
@@ -56,7 +55,7 @@ export class PostService {
          |----------------------------------------------------------------------------------------------*/
 
         return this._http
-                   .get(`${this._backendUri}/posts`)
+                   .get(`${this._direcciones.server}/posts`)
                    .map((response: Response) => Post.fromJsonToList(response.json()));
     }
 
@@ -84,13 +83,13 @@ export class PostService {
          |--------------------------------------------------------------------------------------------------*/
 
         return this._http
-                   .get(`${this._backendUri}/posts`)
+                   .get(`${this._direcciones.server}/posts`)
                    .map((response: Response) => Post.fromJsonToList(response.json()));
     }
 
     getPostDetails(id: number): Observable<Post> {
         return this._http
-                   .get(`${this._backendUri}/posts/${id}`)
+                   .get(`${this._direcciones.server}/posts/${id}`)
                    .map((response: Response) => Post.fromJson(response.json()));
     }
 

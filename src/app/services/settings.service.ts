@@ -4,5 +4,8 @@ export const BackendUri: OpaqueToken = new OpaqueToken("BackendUri");
 
 export const BackendUriProvider = {
     provide: BackendUri,
-    useValue: "http://localhost:3004"
+    useValue: {
+        server: "http://localhost:3004",
+        app: "http://localhost:4200"
+    }
 };
