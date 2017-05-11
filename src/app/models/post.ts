@@ -1,5 +1,6 @@
 import { Category } from "./category";
 import { User } from "./user";
+import { BackendUriProvider } from '../services/settings.service';
 
 export class Post {
     
@@ -34,5 +35,9 @@ export class Post {
             posts.push(Post.fromJson(post));
             return posts;
         }, []);
+    }
+
+    generarRutaPost(){
+        return `${BackendUriProvider}/posts/${this.id}`;
     }
 }

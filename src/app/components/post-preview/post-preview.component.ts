@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Post } from "../../models/post";
 
@@ -10,6 +10,7 @@ import { Post } from "../../models/post";
 export class PostPreviewComponent {
 
     @Input() post: Post;
+    @Output() accederPost: EventEmitter<Post> = new EventEmitter();
 
     /*------------------------------------------------------------------------------------------------------------------|
      | ~~~ Red Path ~~~                                                                                                 |
@@ -30,4 +31,11 @@ export class PostPreviewComponent {
     plainTextToHtml(text: string): string {
         return `<p>${text.replace(/\n/gi, "</p><p>")}</p>`;
     }
+
+    mostrarPost(accederPost){
+        this.accederPost.emit(this.post);
+        
+    }
+    
+
 }
