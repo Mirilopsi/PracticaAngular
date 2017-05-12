@@ -12,7 +12,7 @@ export class PostService {
 
     constructor(
         private _http: Http,
-        @Inject(BackendUri) private _direcciones: any) { }
+        @Inject(BackendUri) private _backendUri: any) { }
 
     getPosts(): Observable<Post[]> {
         /*----------------------------------------------------------------------------------------------|
@@ -31,12 +31,11 @@ export class PostService {
          |----------------------------------------------------------------------------------------------*/
 
         return this._http
-                   .get(`${this._direcciones.server}/posts?publicationDate_lte=${this.date.valueOf()}&_sort=publicationDate&_order=DESC`)
+                   .get(`${this._backendUri}/posts?publicationDate_lte=${this.date.valueOf()}&_sort=publicationDate&_order=DESC`)
                    .map((response: Response) => Post.fromJsonToList(response.json()));
     }
 
     getUserPosts(id: number): Observable<Post[]> {
-
         /*----------------------------------------------------------------------------------------------|
          | ~~~ Red Path ~~~                                                                             |
          |----------------------------------------------------------------------------------------------|
@@ -53,9 +52,8 @@ export class PostService {
          |   - Filtro por fecha de publicación: publicationDate_lte=x (siendo x la fecha actual)        |
          |   - Ordenación: _sort=publicationDate&_order=DESC                                            |
          |----------------------------------------------------------------------------------------------*/
-
         return this._http
-                   .get(`${this._direcciones.server}/posts`)
+                   .get(`${this._backendUri}/posts?author.id=${id}&publicationDate_lte=${this.date.valueOf()}&_sort=publicationDate&_order=DESC`)
                    .map((response: Response) => Post.fromJsonToList(response.json()));
     }
 
@@ -83,13 +81,13 @@ export class PostService {
          |--------------------------------------------------------------------------------------------------*/
 
         return this._http
-                   .get(`${this._direcciones.server}/posts`)
+                   .get(`${this._backendUri}/posts`)
                    .map((response: Response) => Post.fromJsonToList(response.json()));
     }
 
     getPostDetails(id: number): Observable<Post> {
         return this._http
-                   .get(`${this._direcciones.server}/posts/${id}`)
+                   .get(`${this._backendUri}/posts/${id}`)
                    .map((response: Response) => Post.fromJson(response.json()));
     }
 

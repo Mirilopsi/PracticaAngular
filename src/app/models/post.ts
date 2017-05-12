@@ -40,4 +40,6 @@ export class Post {
     generarRutaPost(){
         return `${BackendUriProvider}/posts/${this.id}`;
     }
+
+     
 }

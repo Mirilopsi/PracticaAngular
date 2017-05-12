@@ -16,4 +16,4 @@
 |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
 -->
 
-<post-preview *ngFor="let post of posts" [post]="post" (accederPost)="detallesPostSeleccionado(post)"></post-preview>
+<post-preview *ngFor="let post of posts" [post]="post" (accederPost)="detallesPostSeleccionado(post)" (accederUser)="postPreviewComponent($event)"></post-preview>

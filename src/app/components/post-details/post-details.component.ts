@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute} from "@angular/router";
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Post } from "../../models/post";
 
@@ -8,14 +8,12 @@ import { Post } from "../../models/post";
     styleUrls: ["post-details.component.css"]
 })
 export class PostDetailsComponent implements OnInit {
-
-    post: Post;
-    date: Date;
+    @Input() post: Post;
     
-    constructor(private _activatedRoute: ActivatedRoute) { }
+    constructor(private _activatedRoute: ActivatedRoute, private route:Router) { }
     
     ngOnInit(): void {
-        this._activatedRoute.data.forEach((data: { post: Post}) => this.post = data.post);
+        this._activatedRoute.data.forEach((data: {post: Post})  => this.post = data.post);
         window.scrollTo(0, 0);
     }
 
@@ -30,6 +28,11 @@ export class PostDetailsComponent implements OnInit {
      | para hacer esto necesitas inyectar como dependencia el Router de la app. La ruta a navegar es '/posts/users', |
      | pasando como parámetro el identificador del autor.                                                            |
      |---------------------------------------------------------------------------------------------------------------*/
+
+    navegarPostsAutor(post:Post){
+        const _ruta :string = `/posts/users/${post.author.id}`;
+        this.route.navigateByUrl(_ruta);
+     }
 
     /*--------------------------------------------------------------------------------------------------------------------|
      | ~~~ Yellow Path ~~~                                                                                                |

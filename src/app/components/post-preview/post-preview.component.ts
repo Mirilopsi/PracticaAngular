@@ -11,6 +11,7 @@ export class PostPreviewComponent {
 
     @Input() post: Post;
     @Output() accederPost: EventEmitter<Post> = new EventEmitter();
+    @Output() accederUser: EventEmitter<Post> = new EventEmitter();
 
     /*------------------------------------------------------------------------------------------------------------------|
      | ~~~ Red Path ~~~                                                                                                 |
@@ -32,9 +33,12 @@ export class PostPreviewComponent {
         return `<p>${text.replace(/\n/gi, "</p><p>")}</p>`;
     }
 
-    mostrarPost(accederPost){
-        this.accederPost.emit(this.post);
-        
+    notificarPostsAutor(post:Post){
+       this.accederUser.emit(post);
+     }
+
+    mostrarPost(post:Post){
+        this.accederPost.emit(post);
     }
     
 

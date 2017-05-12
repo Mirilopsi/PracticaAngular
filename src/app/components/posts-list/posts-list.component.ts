@@ -1,7 +1,8 @@
 import { Component, Input, Inject } from '@angular/core';
 
 import { Post } from "../../models/post";
-import { BackendUri } from '../../services/settings.service';
+import { PostPreviewComponent } from '../post-preview/post-preview.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: "posts-list",
@@ -10,10 +11,9 @@ import { BackendUri } from '../../services/settings.service';
 export class PostsListComponent {
 
     @Input() posts: Post[];
-   
-    constructor( @Inject(BackendUri) private _direcciones:any){}
-    _ruta: string;
-    
+    constructor(private route:Router){}
+
+
     /*------------------------------------------------------------------------------------------------------------------|
      | ~~~ Red Path ~~~                                                                                                 |
      |------------------------------------------------------------------------------------------------------------------|
@@ -21,6 +21,11 @@ export class PostsListComponent {
      | dirección correspondiente. Recuerda que para hacer esto necesitas inyectar como dependencia el Router de la app. |
      | La ruta a navegar es '/posts/users', pasando como parámetro el identificador del autor.                          |
      |------------------------------------------------------------------------------------------------------------------*/
+
+      postPreviewComponent(post){
+        const _ruta :string = `/posts/users/${post.author.id}`;
+        this.route.navigateByUrl(_ruta);
+    }
 
     /*-----------------------------------------------------------------------------------------------------------------|
      | ~~~ Green Path ~~~                                                                                              |
@@ -30,7 +35,8 @@ export class PostsListComponent {
      | a navegar es '/posts', pasando como parámetro el identificador del post.                                        |
      |-----------------------------------------------------------------------------------------------------------------*/
      detallesPostSeleccionado(post:Post){
-         this._ruta = `${this._direcciones.app}/posts/${post.id}`;
-         window.open(this._ruta,'_blank');
+         const _ruta :string = `/posts/${post.id}`;
+         this.route.navigateByUrl(_ruta);
+
      }
 }
