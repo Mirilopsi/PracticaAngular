@@ -114,7 +114,8 @@ export class PostService {
          | datos actualizados obtenidos tras la inserción; puedes usar la función estática  |
          | 'fromJson() para crar un nuevo objeto Post basado en la respuesta HTTP obtenida. |
          |----------------------------------------------------------------------------------*/
-
-        return null;
+         return this._http
+                   .post(`${this._backendUri}/posts`,post)
+                   .map((response: Response) =>  Post.fromJson(response.json()));
     }
 }
