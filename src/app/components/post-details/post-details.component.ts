@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Post } from "../../models/post";
+import { Category } from '../../models/category';
 
 @Component({
     templateUrl: "post-details.component.html",
@@ -9,6 +10,7 @@ import { Post } from "../../models/post";
 })
 export class PostDetailsComponent implements OnInit {
     @Input() post: Post;
+    @Input() category: Category;
     
     constructor(private _activatedRoute: ActivatedRoute, private route:Router) { }
     
@@ -41,5 +43,9 @@ export class PostDetailsComponent implements OnInit {
      | para hacer esto necesitas inyectar como dependencia el Router de la app. La ruta a navegar es '/posts/categories', |
      | pasando como parámetro el identificador de la categoría.                                                           |
      |--------------------------------------------------------------------------------------------------------------------*/
-     
+     mostrarCategorias(category: Category){
+        const _ruta: string = `/posts/categories/${category.id}`;
+        this.route.navigateByUrl(_ruta);
+        
+     }
 }

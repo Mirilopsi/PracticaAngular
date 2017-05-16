@@ -6,7 +6,7 @@
     | Un clic sobre la categoría debería enviar un evento al componente padre. |
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
     -->
-    <span class="blink-font" *ngFor="let category of categories">
+    <span class="blink-font" *ngFor="let category of categories" (click)=notificarCategoria(category)>
         {{ category.name }}
     </span>
 </div>

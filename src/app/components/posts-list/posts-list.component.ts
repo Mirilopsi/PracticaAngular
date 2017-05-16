@@ -37,6 +37,5 @@ export class PostsListComponent {
      detallesPostSeleccionado(post:Post){
          const _ruta :string = `/posts/${post.id}`;
          this.route.navigateByUrl(_ruta);
-
      }
 }
