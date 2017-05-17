@@ -12,6 +12,22 @@
     color: rgba(0, 0, 0, .8);
 }
 
+.cabecera {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+button {
+    border: solid 1px #70d9b1;
+    color: #70d9b1;
+}
+
+button:hover {
+    color: white;
+    background-color: #70d9b1;
+}
+
 .metadata .avatar,
 .metadata .author {
     display: inline-block;
@@ -59,11 +75,7 @@
 }
 
 .post .html-text {
-    font-family:
-        Georgia,
-        Cambria,
-        "Times New Roman",
-        Times,serif;
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
     font-size: 18px;
     line-height: 1.58;
     letter-spacing: -.004em;

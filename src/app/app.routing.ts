@@ -8,6 +8,7 @@ import { PostDetailsComponent } from "./components/post-details/post-details.com
 import { UserPostsComponent } from "./components/user-posts/user-posts.component";
 import { PostDetailsResolve } from "./services/post-details-resolve.service";
 import { PostsResolve } from "./services/posts-resolve.service";
+import { EditStoryComponent } from './components/edit-story/edit-story.component';
 
 const routes: Routes = [
     {
@@ -34,6 +35,13 @@ const routes: Routes = [
     {
         path: "new-story",
         component: NewStoryComponent
+    },
+    {
+        path: "posts/edit/:postId",
+        component: EditStoryComponent,
+        resolve: {
+            post: PostDetailsResolve
+        }
     },
     {
         path: "posts/:postId",

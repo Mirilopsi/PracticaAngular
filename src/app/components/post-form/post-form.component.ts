@@ -1,8 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { FormGroup } from "@angular/forms";
 
 import { Post } from "../../models/post";
 import { User } from "../../models/user";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: "post-form",
@@ -10,14 +11,23 @@ import { User } from "../../models/user";
     styleUrls: ["post-form.component.css"]
 })
 export class PostFormComponent implements OnInit {
+    @Input() post: Post;
+    @Input() value: any;
 
     nowDatetimeLocal: string;
     publicationDateScheduled: boolean = false;
 
     @Output() postSubmitted: EventEmitter<Post> = new EventEmitter();
 
+    constructor(private _activatedRoute: ActivatedRoute){}
+
     ngOnInit(): void {
+
+        this._activatedRoute.data.forEach((data: {post: Post})  => this.post = data.post);
         this.nowDatetimeLocal = this._formatDateToDatetimeLocal(new Date());
+
+        if(this.post){this.value = this.post; console.log('value: ',this.value)}
+        else this.value="";
     }
 
     private _formatDateToDatetimeLocal(date: Date) {
@@ -62,10 +72,19 @@ export class PostFormComponent implements OnInit {
          | distintos elementos del formulario se correspondan con las propiedades de la clase Post.                    |
          |-------------------------------------------------------------------------------------------------------------*/
         let post: Post = Post.fromJson(form.value);
-        
+        if(this.post.id) post.id = this.post.id;
         post.likes = 0;
         post.author = User.defaultUser();
         post.publicationDate = this._getPostPublicationDate(form.value.publicationDate);
+        post.media = "";
         this.postSubmitted.emit(post);
     }
+
+    compruebaUsuario(){
+        
+        if(this.post.author.id === User.defaultUser().id)
+            return true;
+        else
+            return false;
+     }
 }

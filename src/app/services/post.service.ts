@@ -118,4 +118,10 @@ export class PostService {
                    .post(`${this._backendUri}/posts`,post)
                    .map((response: Response) =>  Post.fromJson(response.json()));
     }
+
+    editPost(post:Post): Observable<Post> {
+        return this._http
+                   .put(`${this._backendUri}/posts/${post.id}`, post)
+                   .map((response: Response) => Post.fromJson(response.json()));
+    }
 }

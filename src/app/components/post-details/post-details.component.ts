@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Post } from "../../models/post";
 import { Category } from '../../models/category';
+import { User } from '../../models/user';
 
 @Component({
     templateUrl: "post-details.component.html",
@@ -11,12 +12,14 @@ import { Category } from '../../models/category';
 export class PostDetailsComponent implements OnInit {
     @Input() post: Post;
     @Input() category: Category;
+    @Input() realUser: boolean;
     
     constructor(private _activatedRoute: ActivatedRoute, private route:Router) { }
     
     ngOnInit(): void {
         this._activatedRoute.data.forEach((data: {post: Post})  => this.post = data.post);
         window.scrollTo(0, 0);
+        this.compruebaUsuario();
     }
 
     plainTextToHtml(text: string): string {
@@ -47,5 +50,18 @@ export class PostDetailsComponent implements OnInit {
         const _ruta: string = `/posts/categories/${category.id}`;
         this.route.navigateByUrl(_ruta);
         
+     }
+
+     compruebaUsuario(){
+        if(this.post.author.id === User.defaultUser().id)
+            this.realUser=true;
+        else
+            this.realUser = false;
+     }
+
+
+     editarPost(post:Post){
+        const _ruta: string = `/posts/edit/${post.id}`;
+        this.route.navigateByUrl(_ruta);
      }
 }

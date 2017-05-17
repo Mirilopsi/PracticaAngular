@@ -12,10 +12,13 @@ import { PostService } from "../../services/post.service";
 export class NewStoryComponent implements OnDestroy {
 
     private _postSubscription: Subscription;
+    nuevoPost:Post;
 
     constructor(
         private _postService: PostService,
         private _router: Router) { }
+
+    
 
     ngOnDestroy(): void {
         this._unsubscribePostCreation();

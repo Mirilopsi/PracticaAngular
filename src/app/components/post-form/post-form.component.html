@@ -7,7 +7,8 @@
 | referencia del formulario en él.                                                            |
 |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
 -->
-<form novalidate #postForm="ngForm" (ngSubmit)="submitPost(postForm)">
+<form novalidate #postForm="ngForm" *ngIf="compruebaUsuario()" (ngSubmit)="submitPost(postForm)">
+
     <!--
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
     | Purple Path                                                                                     |
@@ -16,7 +17,8 @@
     | el nombre que se ha definido en la entidad Post. Además, este campo debe ser obligatorio.       |
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
     -->
-    <input type="text" placeholder="Título" class="u-full-width" ngModel name="title" required>
+    <input type="text" placeholder="Título" class="u-full-width" name="title" [(ngModel)]="value.title" required>
+
     <!--
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
     | Purple Path                                                                                     |
@@ -25,7 +27,8 @@
     | el nombre que se ha definido en la entidad Post. Además, este campo debe ser obligatorio.       |
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
     -->
-    <textarea placeholder="Introduce tu historia" class="u-full-width georgia-font" ngModel name="intro" required autogrow></textarea>
+    <textarea placeholder="Introduce tu historia" class="u-full-width georgia-font" [(ngModel)]="value.intro" name="intro" required autogrow></textarea>
+
     <!--
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
     | Purple Path                                                                                     |
@@ -34,11 +37,11 @@
     | el nombre que se ha definido en la entidad Post. Además, este campo debe ser obligatorio.       |
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
     -->
-    <textarea placeholder="Cuenta tu historia" class="u-full-width georgia-font" ngModel name="body" required autogrow></textarea>
+    <textarea placeholder="Cuenta tu historia" class="u-full-width georgia-font" [(ngModel)]="value.body" name="body" required autogrow></textarea>
     <div>
         <div>
             <label (click)="setScheduling(false)">
-                <span class="radio-input" [class.active]="!publicationDateScheduled" ></span>
+                <span class="radio-input" [class.active]="!publicationDateScheduled"  ></span>
                 No programar
             </label>
         </div>
@@ -52,6 +55,7 @@
             <input type="datetime-local" name="publicationDate" [min]="nowDatetimeLocal" [ngModel]="nowDatetimeLocal">
         </div>
     </div>
+
     <!--
     |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
     | Purple Path                                                              |
@@ -62,3 +66,5 @@
     -->
     <button type="submit" class="button-primary u-pull-right" [disabled]="postForm.invalid">Publicar</button>
 </form>
+
+<div class="mensajeError" *ngIf="!compruebaUsuario()">Este no es tu post, no puedes modificarlo</div>
