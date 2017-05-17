@@ -18,6 +18,7 @@ export class PostFormComponent implements OnInit {
     publicationDateScheduled: boolean = false;
 
     @Output() postSubmitted: EventEmitter<Post> = new EventEmitter();
+    @Output() postEdited: EventEmitter<Post> = new EventEmitter();
 
     constructor(private _activatedRoute: ActivatedRoute){}
 
@@ -26,7 +27,7 @@ export class PostFormComponent implements OnInit {
         this._activatedRoute.data.forEach((data: {post: Post})  => this.post = data.post);
         this.nowDatetimeLocal = this._formatDateToDatetimeLocal(new Date());
 
-        if(this.post){this.value = this.post; console.log('value: ',this.value)}
+        if(this.post){this.value = this.post; }
         else this.value="";
     }
 
@@ -71,18 +72,22 @@ export class PostFormComponent implements OnInit {
          | nada a lo indicado en el formulario. Por tanto, pon especial atención a que los nombres indicados en los    |
          | distintos elementos del formulario se correspondan con las propiedades de la clase Post.                    |
          |-------------------------------------------------------------------------------------------------------------*/
-        let post: Post = Post.fromJson(form.value);
-        if(this.post.id) post.id = this.post.id;
-        post.likes = 0;
-        post.author = User.defaultUser();
-        post.publicationDate = this._getPostPublicationDate(form.value.publicationDate);
-        post.media = "";
-        this.postSubmitted.emit(post);
+        let postModificado: Post = Post.fromJson(form.value);
+        postModificado.likes = 0;
+        postModificado.author = User.defaultUser();
+        postModificado.publicationDate = this._getPostPublicationDate(form.value.publicationDate);
+        postModificado.media = "";
+        
+        if(this.post) {
+            postModificado.id = this.post.id;
+            this.postEdited.emit(postModificado);
+        }
+        else {this.postSubmitted.emit(postModificado);}
     }
 
     compruebaUsuario(){
         
-        if(this.post.author.id === User.defaultUser().id)
+        if(!this.post || this.post.author.id === User.defaultUser().id)
             return true;
         else
             return false;

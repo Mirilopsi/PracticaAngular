@@ -31,7 +31,6 @@ export class PostsResolve implements Resolve<Post[]> {
 
         if(route.paramMap.has('userId')) return this._postService.getUserPosts(+route.paramMap.get('userId'));
         if(route.paramMap.has('categoryId')) return this._postService.getCategoryPosts(+route.paramMap.get('categoryId'));
-        
         return this._postService.getPosts();
             
     }

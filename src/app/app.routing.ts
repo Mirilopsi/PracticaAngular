@@ -38,7 +38,7 @@ const routes: Routes = [
     },
     {
         path: "posts/edit/:postId",
-        component: EditStoryComponent,
+        component: NewStoryComponent,
         resolve: {
             post: PostDetailsResolve
         }

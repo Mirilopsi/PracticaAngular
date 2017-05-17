@@ -9,13 +9,13 @@ import { Category } from '../models/category';
 
 @Injectable()
 export class PostService {
-    date:Date = new Date();
-
     constructor(
         private _http: Http,
         @Inject(BackendUri) private _backendUri: any) { }
 
     getPosts(): Observable<Post[]> {
+        let date:number = new Date().getTime();
+        
         /*----------------------------------------------------------------------------------------------|
          | ~~~ Pink Path ~~~                                                                            |
          |----------------------------------------------------------------------------------------------|
@@ -32,11 +32,13 @@ export class PostService {
          |----------------------------------------------------------------------------------------------*/
 
         return this._http
-                   .get(`${this._backendUri}/posts?publicationDate_lte=${this.date.valueOf()}&_sort=publicationDate&_order=DESC`)
+                   .get(`${this._backendUri}/posts?publicationDate_lte=${date}&_sort=publicationDate&_order=DESC`)
                    .map((response: Response) => Post.fromJsonToList(response.json()));
     }
 
     getUserPosts(id: number): Observable<Post[]> {
+        let date:number = new Date().getTime();
+        
         /*----------------------------------------------------------------------------------------------|
          | ~~~ Red Path ~~~                                                                             |
          |----------------------------------------------------------------------------------------------|
@@ -54,12 +56,13 @@ export class PostService {
          |   - Ordenación: _sort=publicationDate&_order=DESC                                            |
          |----------------------------------------------------------------------------------------------*/
         return this._http
-                   .get(`${this._backendUri}/posts?author.id=${id}&publicationDate_lte=${this.date.valueOf()}&_sort=publicationDate&_order=DESC`)
+                   .get(`${this._backendUri}/posts?author.id=${id}&publicationDate_lte=${date.valueOf()}&_sort=publicationDate&_order=DESC`)
                    .map((response: Response) => Post.fromJsonToList(response.json()));
     }
 
     getCategoryPosts(id: number): Observable<Post[]> {
-
+        let date:number = new Date().getTime();
+        
         /*--------------------------------------------------------------------------------------------------|
          | ~~~ Yellow Path ~~~                                                                              |
          |--------------------------------------------------------------------------------------------------|
@@ -83,7 +86,7 @@ export class PostService {
 
 
         return this._http
-                   .get(`${this._backendUri}/posts?publicationDate_lte=${this.date.valueOf()}&_sort=publicationDate&order=DESC`)
+                   .get(`${this._backendUri}/posts?publicationDate_lte=${date.valueOf()}&_sort=publicationDate&order=DESC`)
                    .map((response:Response)=>
                     {
                         let lista =  Post.fromJsonToList(response.json());
@@ -104,7 +107,7 @@ export class PostService {
     }
 
     createPost(post: Post): Observable<Post> {
-
+        
         /*----------------------------------------------------------------------------------|
          | ~~~ Purple Path ~~~                                                              |
          |----------------------------------------------------------------------------------|

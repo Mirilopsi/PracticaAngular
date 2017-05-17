@@ -7,6 +7,7 @@
 | referencia del formulario en él.                                                            |
 |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
 -->
+
 <form novalidate #postForm="ngForm" *ngIf="compruebaUsuario()" (ngSubmit)="submitPost(postForm)">
 
     <!--
@@ -67,4 +68,4 @@
     <button type="submit" class="button-primary u-pull-right" [disabled]="postForm.invalid">Publicar</button>
 </form>
 
-<div class="mensajeError" *ngIf="!compruebaUsuario()">Este no es tu post, no puedes modificarlo</div>
+<div class="mensajeError" *ngIf="post&&!compruebaUsuario()">Este no es tu post, no puedes modificarlo</div>

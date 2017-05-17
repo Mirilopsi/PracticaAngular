@@ -62,6 +62,6 @@ export class PostDetailsComponent implements OnInit {
 
      editarPost(post:Post){
         const _ruta: string = `/posts/edit/${post.id}`;
-        this.route.navigateByUrl(_ruta);
+        this.route.navigate([_ruta]);
      }
 }

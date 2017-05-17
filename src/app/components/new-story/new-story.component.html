@@ -1,1 +1,1 @@
-<post-form (postSubmitted)="createPost($event)"></post-form>
+<post-form [post]="postAntiguo" (postSubmitted)="createPost($event)" (postEdited)="editPost($event)"></post-form>
