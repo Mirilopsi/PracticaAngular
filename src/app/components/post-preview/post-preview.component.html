@@ -1,24 +1,31 @@
 <div class="metadata">
+
     <div class="avatar">
         <img [src]="post.author.avatar">
+
     </div>
     <div class="author">
-        <!--
+        <div class="cabecera">
+            <!--
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
         | Red Path                                                             |
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
         | Un clic sobre el autor debería enviar un evento al componente padre. |
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
         -->
-        <span class="name blink-font" (click)="notificarPostsAutor(post)">{{ post.author.name }}</span>
-        <!--
+            <span class="name blink-font" (click)="notificarPostsAutor(post)">{{ post.author.name }}</span>
+            <!--
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
         | Blue Path                                                                     |
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
         | Una vez tengas creado el pipe FromNowPipe, úsalo con la fecha de publicación. |
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
         -->
-        <span class="date">{{ post.publicationDate | FromNow }}</span>
+            <span class="date">{{ post.publicationDate | FromNow }}</span>
+        </div>
+
+        <likes-post [post]="post"></likes-post>
+
     </div>
 </div>
 <!--

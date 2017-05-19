@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Post } from "../../models/post";
+import { User } from '../../models/user';
 
 @Component({
     selector: "post-preview",
@@ -8,7 +9,6 @@ import { Post } from "../../models/post";
     styleUrls: ["post-preview.component.css"]
 })
 export class PostPreviewComponent {
-
     @Input() post: Post;
     @Output() accederPost: EventEmitter<Post> = new EventEmitter();
     @Output() accederUser: EventEmitter<Post> = new EventEmitter();

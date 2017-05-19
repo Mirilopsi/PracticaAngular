@@ -23,7 +23,10 @@
             <span class="date"> {{ post.publicationDate | FromNow }}</span>
         </div>
     </div>
-    <button *ngIf="realUser" (click)="editarPost(post)">Editar</button>
+    <div class="botones">
+        <button *ngIf="realUser" (click)="editarPost(post)">Editar</button>
+        <likes-post [post]="post"></likes-post>
+    </div>
 </div>
 <div class=" post ">
     <h3>{{ post.title }}</h3>

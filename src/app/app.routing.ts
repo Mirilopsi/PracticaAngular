@@ -8,7 +8,7 @@ import { PostDetailsComponent } from "./components/post-details/post-details.com
 import { UserPostsComponent } from "./components/user-posts/user-posts.component";
 import { PostDetailsResolve } from "./services/post-details-resolve.service";
 import { PostsResolve } from "./services/posts-resolve.service";
-import { EditStoryComponent } from './components/edit-story/edit-story.component';
+import { SaveLikesComponent } from './components/save-likes/save-likes.component';
 
 const routes: Routes = [
     {

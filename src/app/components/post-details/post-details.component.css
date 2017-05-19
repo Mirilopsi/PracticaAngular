@@ -18,14 +18,17 @@
     justify-content: space-between;
 }
 
-button {
-    border: solid 1px #70d9b1;
-    color: #70d9b1;
+button:hover {
+    border: solid 1px lightseagreen;
+    color: lightseagreen;
+    background-color: white;
 }
 
-button:hover {
+button {
+    margin-right: 20px;
+    border-radius: 20px;
     color: white;
-    background-color: #70d9b1;
+    background-color: lightseagreen;
 }
 
 .metadata .avatar,
@@ -45,7 +48,7 @@ button:hover {
 .metadata .author .name {
     display: block;
     margin-top: -6px;
-    color: #00ab6b;
+    color: lightseagreen;
 }
 
 .metadata .author .name:hover {
@@ -80,4 +83,9 @@ button:hover {
     line-height: 1.58;
     letter-spacing: -.004em;
     margin: 0;
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
 }

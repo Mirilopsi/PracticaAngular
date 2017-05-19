@@ -1,0 +1,6 @@
+<div class="heart">
+    <div class="hvr-bounce-in"><i *ngIf="!liked" class="fa fa-heart-o" aria-hidden="true" (click)="anadirLike(post)"></i>
+        <i *ngIf="liked" class="fa fa-heart" aria-hidden="false" (click)="quitarLike(post)"></i>
+    </div>
+    <p>{{post.likes.length | numLikes}} likes</p>
+</div>

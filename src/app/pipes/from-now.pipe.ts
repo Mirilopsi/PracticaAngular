@@ -20,7 +20,6 @@ export class FromNowPipe implements PipeTransform{
     transform(value:number) {
         this.postDate = new Date(value);
         this.dateFromNow = moment(this.postDate).fromNow();
-        // this.dateFromNow = new Date(value);
         return this.dateFromNow;
     }
 }

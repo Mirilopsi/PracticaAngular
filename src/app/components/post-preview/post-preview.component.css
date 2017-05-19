@@ -12,8 +12,29 @@
     color: rgba(0, 0, 0, .8);
 }
 
-.metadata .avatar,
+.metadata {
+    display: flex;
+}
+
 .metadata .author {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.container-likes {
+    display: flex;
+    width: auto;
+}
+
+.container-likes p {
+    border: 1px solid black;
+    padding: 1px 6px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.metadata .avatar {
     display: inline-block;
 }
 
@@ -63,11 +84,7 @@
 }
 
 .post .html-text {
-    font-family:
-        Georgia,
-        Cambria,
-        "Times New Roman",
-        Times,serif;
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
     font-size: 18px;
     line-height: 1.58;
     letter-spacing: -.004em;

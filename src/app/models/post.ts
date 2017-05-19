@@ -13,7 +13,7 @@ export class Post {
         public publicationDate: number,
         public categories: Category[],
         public author: User,
-        public likes: number
+        public likes: number[]
     ) { }
 
     static fromJson(json: any): Post {
@@ -40,6 +40,5 @@ export class Post {
     generarRutaPost(){
         return `${BackendUriProvider}/posts/${this.id}`;
     }
-
      
 }
